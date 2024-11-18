@@ -1,0 +1,52 @@
+flowchart TD
+    A[Start] --> B[Initialize GPIO]
+    B --> C[Initialize I2C]
+    C --> D[Initialize LCD]
+    D --> E[Enter Main Loop]
+    
+    E --> F[Measure Distance]
+    F --> G[Read Water Level]
+    
+    G --> H{Check Water Level}
+    H -->|Level < 200| I[Low Water Level]
+    H -->|200 <= Level < 700| J[Critical Water Level]
+    H -->|Level >= 700| K[High Water Level]
+    
+    I --> I1[Red LED ON]
+    I --> I2[Pump OFF]
+    I --> I3[Display: BAJO]
+    
+    J --> J1[Yellow LED ON]
+    J --> J2[Pump ON]
+    J --> J3[Display: CRITICO]
+    
+    K --> K1[Green LED ON]
+    K --> K2[Pump ON]
+    K --> K3[Display: ALTO]
+    
+    F --> L{Check Distance}
+    L -->|Distance > 12cm| M[Alarming Level]
+    L -->|6cm <= Distance <= 12cm| N[Critical Level]
+    L -->|Distance < 6cm| O[Normal Level]
+    
+    M --> M1[Red LED ON]
+    M --> M2[Pump OFF]
+    M --> M3[Display: ALARMANTE]
+    
+    N --> N1[Yellow LED ON]
+    N --> N2[Pump ON]
+    N --> N3[Display: CRITICO]
+    
+    O --> O1[Green LED ON]
+    O --> O2[Pump ON]
+    O --> O3[Display: NORMAL]
+    
+    M3 & N3 & O3 --> P[Delay 2000ms]
+    I3 & J3 & K3 --> P
+    P --> E
+    
+    style A fill:#66ff66
+    style E fill:#ffff99
+    style H fill:#ff9999
+    style L fill:#ff9999
+    style I1,J1,K1,M1,N1,O1 fill:#lightblue
