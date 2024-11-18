@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"name": "bombucha",
+			"path": ".."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"AlimentadorCode.C": "cpp",
+			"PRUEBA.C": "cpp"
+		}
+	}
+}
